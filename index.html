@@ -1,3 +1,136 @@
-<h1 class="text-blue-500">Ethan</h1>
-<p>Hi! I'm Ethan, and I love creating content and video edits.</p>
-<img src="https://placecats.com/300/200" .../>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ethan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root { --orange: #ff4500; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: #080808; color: #e4e4e4; min-height: 100vh; overflow-x: hidden; }
+    .glow-line { position: fixed; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--orange), transparent); z-index: 100; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 2.5rem; background: rgba(8,8,8,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #1a1a1a; }
+    nav .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--orange); letter-spacing: 2px; }
+    nav ul { display: flex; gap: 2rem; list-style: none; }
+    nav ul a { font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; color: #888; text-decoration: none; transition: color 0.2s; font-family: 'DM Mono', monospace; }
+    nav ul a:hover { color: #fff; }
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 8rem 2.5rem 4rem; position: relative; }
+    .hero-tag { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--orange); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1rem; opacity: 0; animation: fadeUp 0.6s ease forwards 0.2s; }
+    .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 12vw, 9rem); line-height: 0.9; color: #fff; opacity: 0; animation: fadeUp 0.6s ease forwards 0.4s; }
+    .hero h1 span { color: var(--orange); }
+    .hero-sub { margin-top: 1.5rem; font-size: 1rem; color: #666; max-width: 400px; line-height: 1.7; opacity: 0; animation: fadeUp 0.6s ease forwards 0.6s; }
+    .hero-btns { margin-top: 2.5rem; display: flex; gap: 1rem; opacity: 0; animation: fadeUp 0.6s ease forwards 0.8s; }
+    .btn-primary { background: var(--orange); color: #fff; padding: 0.75rem 1.75rem; font-size: 0.8rem; font-family: 'DM Mono', monospace; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; transition: opacity 0.2s; }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-ghost { background: transparent; color: #888; padding: 0.75rem 1.75rem; font-size: 0.8rem; font-family: 'DM Mono', monospace; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; border: 1px solid #2a2a2a; transition: all 0.2s; }
+    .btn-ghost:hover { border-color: var(--orange); color: #fff; }
+    .hero-deco { position: absolute; right: -10vw; top: 50%; transform: translateY(-50%); width: 50vw; height: 50vw; border-radius: 50%; border: 1px solid #ff450015; pointer-events: none; }
+    section { padding: 6rem 2.5rem; position: relative; }
+    .section-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--orange); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; }
+    .section-label::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--orange); opacity: 0.4; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 900px; }
+    .about-grid h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1; color: #fff; margin-bottom: 1.5rem; }
+    .about-grid p { color: #777; line-height: 1.8; font-size: 0.95rem; }
+    .about-stats { display: flex; flex-direction: column; gap: 2rem; }
+    .stat { border-left: 2px solid var(--orange); padding-left: 1.25rem; }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: #fff; line-height: 1; }
+    .stat-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: #555; letter-spacing: 2px; text-transform: uppercase; margin-top: 0.25rem; }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1000px; }
+    .project-card { background: #0f0f0f; border: 1px solid #1a1a1a; padding: 2rem; transition: border-color 0.2s, transform 0.2s; position: relative; overflow: hidden; }
+    .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--orange); transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+    .project-card:hover { border-color: #2a2a2a; transform: translateY(-4px); }
+    .project-card:hover::before { transform: scaleX(1); }
+    .project-emoji { font-size: 2rem; margin-bottom: 1rem; }
+    .project-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.75rem; color: #fff; letter-spacing: 1px; margin-bottom: 0.5rem; }
+    .project-desc { font-size: 0.85rem; color: #555; line-height: 1.7; margin-bottom: 1.5rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .tag { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--orange); border: 1px solid #ff450030; padding: 0.2rem 0.6rem; letter-spacing: 1px; }
+    .project-link { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: #444; text-decoration: none; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+    .project-link:hover { color: var(--orange); }
+    .links-list { display: flex; flex-direction: column; gap: 1px; max-width: 500px; }
+    .link-item { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 0; border-bottom: 1px solid #111; text-decoration: none; color: #888; transition: color 0.2s; font-family: 'DM Mono', monospace; font-size: 0.85rem; letter-spacing: 1px; }
+    .link-item:hover { color: #fff; }
+    .link-item:hover .arrow { color: var(--orange); transform: translateX(4px); }
+    .arrow { transition: transform 0.2s, color 0.2s; }
+    footer { padding: 2rem 2.5rem; border-top: 1px solid #111; display: flex; justify-content: space-between; align-items: center; }
+    footer p { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: #333; letter-spacing: 1px; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 640px) { nav { padding: 1rem 1.25rem; } nav ul { gap: 1rem; } .hero { padding: 7rem 1.25rem 3rem; } .about-grid { grid-template-columns: 1fr; gap: 2.5rem; } section { padding: 4rem 1.25rem; } footer { flex-direction: column; gap: 0.5rem; text-align: center; } }
+  </style>
+</head>
+<body>
+  <div class="glow-line"></div>
+  <nav>
+    <div class="logo">Ethan</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#links">Links</a></li>
+    </ul>
+  </nav>
+  <section class="hero" id="home">
+    <div class="hero-deco"></div>
+    <p class="hero-tag">// Portfolio</p>
+    <h1>ETHAN<br/><span>KOWALIK</span></h1>
+    <p class="hero-sub">Content creator, video editor, and builder. I make things on the internet and occasionally solder stuff.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#links" class="btn-ghost">Find Me Online</a>
+    </div>
+  </section>
+  <section id="about">
+    <p class="section-label">About Me</p>
+    <div class="about-grid">
+      <div>
+        <h2>BUILDER.<br/>CREATOR.<br/>CODER.</h2>
+        <p>I'm Ethan, a content creator and builder from Ontario. I love making video edits, building cool projects, and learning how things work from the inside out.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat"><div class="stat-num">3+</div><div class="stat-label">Projects Shipped</div></div>
+        <div class="stat"><div class="stat-num">ON</div><div class="stat-label">Ontario, Canada</div></div>
+        <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Ideas in Progress</div></div>
+      </div>
+    </div>
+  </section>
+  <section id="projects">
+    <p class="section-label">Projects</p>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-emoji">🔥</div>
+        <div class="project-name">RoastBot</div>
+        <p class="project-desc">A savage AI chatbot that roasts everything you say. Built with HTML, Tailwind, and the Claude API.</p>
+        <div class="project-tags"><span class="tag">HTML</span><span class="tag">Tailwind</span><span class="tag">Claude API</span></div>
+        <a href="https://ethannkowalikk-coder.github.io/roastbot/" target="_blank" class="project-link">View Live →</a>
+      </div>
+      <div class="project-card">
+        <div class="project-emoji">⌨️</div>
+        <div class="project-name">ClearKeys</div>
+        <p class="project-desc">A custom TKL mechanical keyboard with an acrylic case, RGB lighting, and hand-picked switches.</p>
+        <div class="project-tags"><span class="tag">Hardware</span><span class="tag">QMK</span><span class="tag">Soldering</span></div>
+        <a href="https://github.com/ethannkowalikk-coder/clearkeys" target="_blank" class="project-link">View Repo →</a>
+      </div>
+      <div class="project-card">
+        <div class="project-emoji">🖱️</div>
+        <div class="project-name">EthanMouse</div>
+        <p class="project-desc">A custom gaming mouse built from scratch with a PMW3360 sensor and Kailh switches.</p>
+        <div class="project-tags"><span class="tag">Hardware</span><span class="tag">Electronics</span></div>
+        <a href="#" class="project-link">Coming Soon →</a>
+      </div>
+    </div>
+  </section>
+  <section id="links">
+    <p class="section-label">Find Me</p>
+    <div class="links-list">
+      <a href="https://github.com/ethannkowalikk-coder" target="_blank" class="link-item"><span>GitHub</span><span class="arrow">→</span></a>
+      <a href="https://ethannkowalikk-coder.github.io/roastbot/" target="_blank" class="link-item"><span>RoastBot</span><span class="arrow">→</span></a>
+      <a href="https://macondo.hackclub.com/u/91ad2de6-fdf3-413f-aeaa-ffa23362358d" target="_blank" class="link-item"><span>Hack Club</span><span class="arrow">→</span></a>
+    </div>
+  </section>
+  <footer>
+    <p>© 2026 Ethan Kowalik</p>
+    <p>Built with HTML + Tailwind</p>
+  </footer>
+</body>
+</html>
